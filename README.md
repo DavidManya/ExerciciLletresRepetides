@@ -1,0 +1,2 @@
+# ExerciciLletresRepetides
+Pràctica funcionalitats bàsiques
