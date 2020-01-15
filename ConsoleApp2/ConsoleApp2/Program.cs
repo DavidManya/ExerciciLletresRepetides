@@ -15,7 +15,7 @@ namespace ConsoleApp2
         static void Main(string[] args)
         {
             //Fase 1
-            char[] lletresnom = { 'D', 'A', 'V', 'I', 'D', 'M', 'A', 'Ñ', 'A', 'A', 'L', 'V', 'A', 'R', 'E', 'Z' };
+            char[] lletresnom = { 'D', 'A', 'V', 'I', 'D' };
             for (int i = 0; i < lletresnom.Length; i++)
             {
                 Console.WriteLine(lletresnom[i]);
@@ -31,18 +31,7 @@ namespace ConsoleApp2
             listLletres.Add(new Lletres { Id = 3, Lletra = 'V', Tipus = "CONSONANT" });
             listLletres.Add(new Lletres { Id = 4, Lletra = 'I', Tipus = "VOCAL" });
             listLletres.Add(new Lletres { Id = 5, Lletra = 'D', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 6, Lletra = 'M', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 7, Lletra = 'A', Tipus = "VOCAL" });
-            listLletres.Add(new Lletres { Id = 8, Lletra = 'Ñ', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 9, Lletra = 'A', Tipus = "VOCAL" });
-            listLletres.Add(new Lletres { Id = 10, Lletra = 'A', Tipus = "VOCAL" });
-            listLletres.Add(new Lletres { Id = 11, Lletra = 'L', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 12, Lletra = 'V', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 13, Lletra = 'A', Tipus = "VOCAL" });
-            listLletres.Add(new Lletres { Id = 14, Lletra = 'R', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 15, Lletra = 'E', Tipus = "VOCAL" });
-            listLletres.Add(new Lletres { Id = 16, Lletra = 'Z', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 17, Lletra = '8', Tipus = "NUMERO" });
+            listLletres.Add(new Lletres { Id = 6, Lletra = '8', Tipus = "NUMERO" });
 
             foreach (Lletres p in listLletres)
             {
@@ -55,6 +44,29 @@ namespace ConsoleApp2
                     missatge = p.Tipus;
                 }
                 Console.WriteLine(missatge);
+            }
+
+            //Fase 3
+            IDictionary<string, int> dict = new Dictionary<string, int>(StringComparer.InvariantCultureIgnoreCase);
+           
+            //Omplir el Dictionary amb els valors de la llista, amb les lletres i el nombre de vegades que apareixen
+            foreach (Lletres p in listLletres)
+            {
+                if (p.Tipus != "NUMERO")
+                {
+                    if (dict.ContainsKey(p.Lletra.ToString()))
+                    {
+                        dict[p.Lletra.ToString()] ++;
+                    }
+                    else
+                    {
+                        dict.Add(p.Lletra.ToString(), 1);
+                    }
+                }
+            }
+            foreach (KeyValuePair<string, int> entrada in dict)
+            {
+                Console.WriteLine($"La lletra {entrada.Key} apareix {entrada.Value} vegades");
             }
         }
     }
