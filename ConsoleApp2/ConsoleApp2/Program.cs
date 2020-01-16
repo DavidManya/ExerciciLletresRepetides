@@ -1,9 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Lletres
+public class Nom
 {
-    public int Id { get; set; }
+    public char Lletra { get; set; }
+    public string Tipus { get; set; }
+}
+
+public class Cognom
+{
+    public char Lletra { get; set; }
+    public string Tipus { get; set; }
+}
+
+public class Complert
+{
     public char Lletra { get; set; }
     public string Tipus { get; set; }
 }
@@ -15,25 +26,25 @@ namespace ConsoleApp2
         static void Main(string[] args)
         {
             //Fase 1
-            char[] lletresnom = { 'D', 'A', 'V', 'I', 'D' };
-            for (int i = 0; i < lletresnom.Length; i++)
+            char[] Nomchar = { 'D', 'A', 'V', 'I', 'D' };
+            for (int i = 0; i < Nomchar.Length; i++)
             {
-                Console.WriteLine(lletresnom[i]);
+                Console.WriteLine(Nomchar[i]);
             }
 
             //Fase 2
             string missatge;
 
-            // Crear una llista
-            List<Lletres> listLletres = new List<Lletres>();
-            listLletres.Add(new Lletres { Id = 1, Lletra = 'D', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 2, Lletra = 'A', Tipus = "VOCAL" });
-            listLletres.Add(new Lletres { Id = 3, Lletra = 'V', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 4, Lletra = 'I', Tipus = "VOCAL" });
-            listLletres.Add(new Lletres { Id = 5, Lletra = 'D', Tipus = "CONSONANT" });
-            listLletres.Add(new Lletres { Id = 6, Lletra = '8', Tipus = "NUMERO" });
+            // Crear una llista amb el nom
+            List<Nom> listNom = new List<Nom>();
+            listNom.Add(new Nom { Lletra = 'D', Tipus = "CONSONANT" });
+            listNom.Add(new Nom { Lletra = 'A', Tipus = "VOCAL" });
+            listNom.Add(new Nom { Lletra = 'V', Tipus = "CONSONANT" });
+            listNom.Add(new Nom { Lletra = 'I', Tipus = "VOCAL" });
+            listNom.Add(new Nom { Lletra = 'D', Tipus = "CONSONANT" });
+            //listNom.Add(new Nom { Lletra = '8', Tipus = "NUMERO" });
 
-            foreach (Lletres p in listLletres)
+            foreach (Nom p in listNom)
             {
                 if (p.Tipus == "NUMERO")
                 {
@@ -49,8 +60,8 @@ namespace ConsoleApp2
             //Fase 3
             IDictionary<string, int> dict = new Dictionary<string, int>(StringComparer.InvariantCultureIgnoreCase);
            
-            //Omplir el Dictionary amb els valors de la llista, amb les lletres i el nombre de vegades que apareixen
-            foreach (Lletres p in listLletres)
+            //Omplir un Dictionary amb els valors de la llista, amb les Nom i el nombre de vegades que apareixen
+            foreach (Nom p in listNom)
             {
                 if (p.Tipus != "NUMERO")
                 {
@@ -67,6 +78,36 @@ namespace ConsoleApp2
             foreach (KeyValuePair<string, int> entrada in dict)
             {
                 Console.WriteLine($"La lletra {entrada.Key} apareix {entrada.Value} vegades");
+            }
+            //Fase 4
+            // Crear una llista amb el cognom
+            List<Cognom> listCognom = new List<Cognom>();
+            listCognom.Add(new Cognom { Lletra = 'M', Tipus = "CONSONANT" });
+            listCognom.Add(new Cognom { Lletra = 'A', Tipus = "VOCAL" });
+            listCognom.Add(new Cognom { Lletra = 'N', Tipus = "CONSONANT" });
+            listCognom.Add(new Cognom { Lletra = 'Y', Tipus = "CONSONANT" });
+            listCognom.Add(new Cognom { Lletra = 'À', Tipus = "VOCAL" });
+
+            //Afegim un caracter en blanc al nom per separar-ho del cognom un cop junts
+            listNom.Add(new Nom { Lletra = ' ', Tipus = "ESPAI" });
+
+            //Crear una llista amb el nom sencer
+            List<Complert> listComplert = new List<Complert>();
+
+            foreach (Nom p in listNom)
+            {
+                listComplert.Add(new Complert { Lletra = p.Lletra, Tipus = p.Tipus });
+            }
+
+            foreach (Cognom p in listCognom)
+            {
+                listComplert.Add(new Complert { Lletra = p.Lletra, Tipus = p.Tipus });
+            }
+
+            foreach (Complert p in listComplert)
+            {
+                missatge = p.Lletra.ToString();
+                Console.WriteLine(missatge);
             }
         }
     }
